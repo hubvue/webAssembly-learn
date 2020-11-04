@@ -1,0 +1,17 @@
+[package]
+name = "webAssembly-learn"
+version = "1.0.0"
+description = ""
+license = "ISC"
+
+[dependencies]
+"_/cowsay" = "0.2.0"
+
+[[module]]
+name = "entry"
+source = "entry.wasm"
+abi = "emscripten"
+
+[[command]]
+name = "entry"
+module = "entry"

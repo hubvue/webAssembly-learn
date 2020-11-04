@@ -1,0 +1,4 @@
+wapm_packages/
+node_modules/
+wapm.lock
+package-lock.json
