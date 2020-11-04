@@ -8,10 +8,10 @@ license = "ISC"
 "_/cowsay" = "0.2.0"
 
 [[module]]
-name = "entry"
-source = "entry.wasm"
+name = "add"
+source = "./wasm/program.wasm"
 abi = "emscripten"
 
 [[command]]
-name = "entry"
-module = "entry"
+name = "add"
+module = "add"
