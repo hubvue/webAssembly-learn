@@ -1,0 +1,11 @@
+{
+  "name": "webAssembly-learn",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:hubvue/webAssembly-learn.git",
+  "author": "hubvue <1191340528@qq.com>",
+  "license": "MIT",
+  "scripts" : {
+    "serve": "node ./src/index.js"
+  }
+}
