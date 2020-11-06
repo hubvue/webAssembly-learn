@@ -18,6 +18,13 @@ const failHander = (command, message, data) => {
 const successHandler = (command, message, data, res) => {
   if(command === 'load') {
     console.log('loaded')
+    worker.postMessage({
+      command: 'call',
+      payload: {
+        interface: 'add',
+        params: [1,2]
+      }
+    })
   }
   if(command === 'call') {
     if(res) {
@@ -32,8 +39,8 @@ const importObject = { imports: { imported_func: arg => console.log('Hello world
 worker.postMessage({
   command: 'load',
   payload: {
-    filename: resolve(__dirname, '../wasm/program.wasm'),
-    importObject: JSON.stringify(importObject)
+    filename: resolve(__dirname, '../wasm/fibonacci.wasm'),
+    importObject: JSON.stringify({})
   }
 })
 worker.on('message', ({code, command, message, data}) => {
@@ -41,28 +48,4 @@ worker.on('message', ({code, command, message, data}) => {
     failHander(command, message, data)
   }
   successHandler(command, message, data, null)
-})
-
-
-const server = http.createServer((request, response) => {
-  const args = url.parse(request.url).query
-  const query = querystring.parse(args)
-  worker.postMessage({
-    command: 'call',
-    payload: {
-      interface: query.interface,
-      params: JSON.parse(query.params)
-    }
-  })
-  worker.on('message', ({code, command, message, data}) => {
-    if(!code) {
-      failHander(command, message, data)
-    }
-    successHandler(command, message, data, response )
-  })
-})
-
-
-server.listen(8000, () => {
-  console.log('server is running')
 })

@@ -5,7 +5,8 @@ let wasmExports;
 const loadWasm = async (wasmFile, importObject) => {
   const wasmResouce = await readFile(wasmFile)
   const wasmModule = await WebAssembly.compile(wasmResouce)
-  const {exports} = await WebAssembly.instantiate(wasmModule, importObject)
+  console.log(typeof wasmModule)
+  const {exports} = await WebAssembly.instantiate(wasmModule)
   return exports
 }
 
